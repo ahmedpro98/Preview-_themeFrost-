@@ -248,7 +248,7 @@ export default {
 				'lg': '0 10px 15px -3px rgba(29, 29, 29, 0.1), 0 4px 6px -2px rgba(29, 29, 29, 0.05)',
 				'xl': '0 20px 25px -5px rgba(29, 29, 29, 0.1), 0 10px 10px -5px rgba(29, 29, 29, 0.04)',
 				'2xl': '0 25px 50px -12px rgba(29, 29, 29, 0.25)',
-				
+
 				// Enhanced BRAVIO shadows
 				'card': '0 4px 12px 0 rgba(203, 175, 92, 0.08), 0 2px 4px 0 rgba(29, 29, 29, 0.06)',
 				'card-hover': '0 12px 32px -8px rgba(203, 175, 92, 0.15), 0 8px 16px -4px rgba(29, 29, 29, 0.08)',

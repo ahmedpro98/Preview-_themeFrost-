@@ -1,234 +1,297 @@
-import { useState } from "react";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { DocsSidebar } from "@/components/DocsSidebar";
 import Header from "@/components/Header";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Book, Replace, Zap, Menu } from "lucide-react";
+import BasicDocumentation from "@/components/documentation/BasicDocumentation";
+import ComponentReplacement from "@/components/documentation/ComponentReplacement";
+import AdvancedDocumentation from "@/components/documentation/AdvancedDocumentation";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState } from "react";
 
 const Documentation = () => {
-  const [activeSection, setActiveSection] = useState("basic");
+  const [activeTab, setActiveTab] = useState("basic");
 
-  const renderContent = () => {
-    switch (activeSection) {
-      case "basic":
-        return (
-          <div className="content-group">
-            <div className="content-block">
-              <h1 className="hierarchy-1 mb-6">Basic Documentation</h1>
-              <p className="hierarchy-4 text-lg mb-8 max-w-3xl">
-                Comprehensive guide to get started with our template system. Learn the fundamentals and best practices.
-              </p>
-            </div>
-
-            <div className="card-academic content-block">
-              <h2 className="hierarchy-2 mb-4">Quick Start Guide</h2>
-              <p className="hierarchy-4 mb-6">
-                Follow these essential steps to begin using the template effectively.
-              </p>
-
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4 p-4 bg-slate-50 rounded-lg">
-                  <div className="flex-shrink-0 w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    1
-                  </div>
-                  <div>
-                    <h3 className="hierarchy-3 text-sm mb-1">Setup Environment</h3>
-                    <p className="hierarchy-5 text-sm">Install dependencies and configure your development environment</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4 p-4 bg-slate-50 rounded-lg">
-                  <div className="flex-shrink-0 w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="hierarchy-3 text-sm mb-1">Explore Components</h3>
-                    <p className="hierarchy-5 text-sm">Familiarize yourself with available components and their usage</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4 p-4 bg-slate-50 rounded-lg">
-                  <div className="flex-shrink-0 w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="hierarchy-3 text-sm mb-1">Start Building</h3>
-                    <p className="hierarchy-5 text-sm">Begin creating your application using the template structure</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="card-academic content-block">
-              <h2 className="hierarchy-2 mb-4">Core Features</h2>
-              <div className="grid-academic-2">
-                <div className="space-y-3">
-                  <h3 className="hierarchy-3 text-base">Responsive Design</h3>
-                  <p className="hierarchy-5 text-sm">Mobile-first approach ensuring optimal experience across all devices and screen sizes.</p>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="hierarchy-3 text-base">Modern Components</h3>
-                  <p className="hierarchy-5 text-sm">Pre-built components following current design standards and accessibility guidelines.</p>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="hierarchy-3 text-base">Easy Integration</h3>
-                  <p className="hierarchy-5 text-sm">Straightforward setup process with comprehensive documentation and practical examples.</p>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="hierarchy-3 text-base">Performance Optimized</h3>
-                  <p className="hierarchy-5 text-sm">Built for speed with minimal bundle size and efficient loading strategies.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "replacement":
-        return (
-          <div className="content-group">
-            <div className="content-block">
-              <h1 className="hierarchy-1 mb-6">Component Replacement</h1>
-              <p className="hierarchy-4 text-lg mb-8 max-w-3xl">
-                Learn how to replace and customize components while maintaining consistency and functionality.
-              </p>
-            </div>
-
-            <div className="card-academic content-block">
-              <h2 className="hierarchy-2 mb-4">Replacement Guidelines</h2>
-              <p className="hierarchy-4 mb-6">
-                Best practices for component replacement and customization.
-              </p>
-
-              <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-6">
-                <h3 className="hierarchy-3 text-base mb-3">Essential Practices</h3>
-                <ul className="space-y-3 hierarchy-5 text-sm">
-                  <li className="flex items-start space-x-3">
-                    <span className="text-slate-400 mt-1">•</span>
-                    <span>Test components across different screen sizes and devices</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="text-slate-400 mt-1">•</span>
-                    <span>Maintain accessibility standards (WCAG 2.1 compliance)</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="text-slate-400 mt-1">•</span>
-                    <span>Preserve API structure for consistency when possible</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="text-slate-400 mt-1">•</span>
-                    <span>Document any breaking changes thoroughly</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="card-academic-dark">
-                <h3 className="hierarchy-3 text-base mb-3">Example Implementation</h3>
-                <pre className="text-sm overflow-x-auto"><code>{`// Replace default button component
-import { Button } from './components/ui/button'
-
-// With custom implementation
-import { CustomButton } from './components/custom/button'
-
-// Usage remains consistent
-<CustomButton variant="primary">
-  Click here
-</CustomButton>`}</code></pre>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "advanced":
-        return (
-          <div className="content-group">
-            <div className="content-block">
-              <h1 className="hierarchy-1 mb-6">Advanced Documentation</h1>
-              <p className="hierarchy-4 text-lg mb-8 max-w-3xl">
-                Advanced features, customization options, and complex integration scenarios for experienced developers.
-              </p>
-            </div>
-
-            <div className="card-academic content-block">
-              <h2 className="hierarchy-2 mb-4">Advanced Configuration</h2>
-              <p className="hierarchy-4 mb-6">
-                Configure advanced settings to unlock the full potential of the template system.
-              </p>
-
-              <div className="grid-academic-2">
-                <div className="space-y-4">
-                  <h3 className="hierarchy-3 text-base">Theme Customization</h3>
-                  <p className="hierarchy-5 text-sm mb-4">
-                    Customize colors, typography, and spacing to match your brand identity and design requirements.
-                  </p>
-                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
-                    <code className="text-sm hierarchy-5">
-                      theme: &#123;<br />
-                      &nbsp;&nbsp;colors: &#123;<br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;primary: '#1e293b',<br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;secondary: '#64748b'<br />
-                      &nbsp;&nbsp;&#125;<br />
-                      &#125;
-                    </code>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="hierarchy-3 text-base">Plugin System</h3>
-                  <p className="hierarchy-5 text-sm mb-4">
-                    Extend functionality with our comprehensive plugin architecture and ecosystem.
-                  </p>
-                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
-                    <code className="text-sm hierarchy-5">
-                      plugins: [<br />
-                      &nbsp;&nbsp;'@plugin/animations',<br />
-                      &nbsp;&nbsp;'@plugin/forms',<br />
-                      &nbsp;&nbsp;'@plugin/charts'<br />
-                      ]
-                    </code>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="card-academic-dark content-block">
-              <h2 className="hierarchy-2 text-base mb-4">Performance Optimization</h2>
-              <p className="text-slate-300 text-sm mb-6">
-                Advanced techniques to optimize your application's performance and user experience.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white/10 rounded-lg p-4">
-                  <h3 className="hierarchy-3 text-sm mb-2">Code Splitting</h3>
-                  <p className="text-xs text-slate-300">Reduce initial bundle size with dynamic imports and lazy loading</p>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <h3 className="hierarchy-3 text-sm mb-2">Lazy Loading</h3>
-                  <p className="text-xs text-slate-300">Load components only when needed to improve performance</p>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <h3 className="hierarchy-3 text-sm mb-2">Caching Strategy</h3>
-                  <p className="text-xs text-slate-300">Implement effective caching mechanisms for better UX</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      default:
-        return null;
-    }
-  };
+  const TabButton = ({ value, icon: Icon, title, subtitle, gradientFrom, gradientTo, activeColors }: any) => (
+    <TabsTrigger
+      value={value}
+      className="group relative z-10 flex items-center justify-center px-2 py-2 md:px-6 md:py-4 text-sm font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-xl text-slate-700 data-[state=active]:text-white data-[state=active]:shadow-xl hover:scale-[1.02] hover:shadow-lg min-w-[100px] md:min-w-[160px] data-[state=active]:bg-gradient-to-r"
+      style={{
+        background: activeTab === value
+          ? `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)`
+          : 'transparent'
+      }}
+    >
+      <div className="relative z-10 flex items-center gap-1 md:gap-3">
+        <div className="w-5 h-5 md:w-8 md:h-8 rounded-lg bg-blue-100/80 group-data-[state=active]:bg-white/20 flex items-center justify-center transition-all duration-500 group-data-[state=active]:rotate-6 group-hover:scale-110">
+          <Icon className="w-3 h-3 md:w-4 md:h-4 text-blue-600 group-data-[state=active]:text-white transition-all duration-300" />
+        </div>
+        <div className="text-left">
+          <div className="font-bold text-xs md:text-base">{title}</div>
+          <div className="text-xs opacity-80 font-medium hidden md:block">{subtitle}</div>
+        </div>
+      </div>
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-data-[state=active]:opacity-100 transition-opacity duration-700 blur-xl"
+        style={{
+          background: activeTab === value
+            ? `linear-gradient(135deg, ${activeColors.from} 0%, ${activeColors.to} 100%)`
+            : 'transparent'
+        }}
+      />
+    </TabsTrigger>
+  );
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <SidebarProvider>
-        <div className="flex w-full pt-20">
-          <DocsSidebar activeSection={activeSection} setActiveSection={setActiveSection} />
-          <SidebarInset>
-            <main className="container-academic py-8 lg:py-12">
-              {renderContent()}
-            </main>
-          </SidebarInset>
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+        <Header />
+
+        <div className="pt-16 md:pt-28 pb-6 md:pb-16">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            {/* Mobile Header - Improved */}
+            <div className="text-center mb-6 md:mb-12 lg:mb-16 ">
+              <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-2xl mb-4 md:mb-6 shadow-xl bg-gradient-to-r from-[#0f172a] to-[#1e293b] ">
+                <Book className="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 text-white" />
+              </div>
+              <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 md:mb-4 lg:mb-6 leading-tight px-2 md:px-4 bg-gradient-to-b from-[#0f172a] to-[#1e293b] bg-clip-text text-transparent">
+                Complete Documentation
+              </h1>
+              <p className="text-sm md:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed px-4 md:px-4 text-slate-600">
+                An easy guide for non-programmers to easily customize your website in seconds.
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                {/* Mobile Navigation - Improved Sheet */}
+                <div className="block md:hidden mb-6">
+                  <Sheet>
+                    <SheetTrigger className="w-full bg-gradient-to-r from-white/95 to-blue-50/95 backdrop-blur-xl border-2 border-blue-200/50 rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-between group">
+                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          {activeTab === "basic" && <Book className="w-5 h-5 text-white" />}
+                          {activeTab === "components" && <Replace className="w-5 h-5 text-white" />}
+                          {activeTab === "advanced" && <Zap className="w-5 h-5 text-white" />}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="font-bold text-base text-slate-800 truncate">
+                            {activeTab === "basic" && "Basic Documentation"}
+                            {activeTab === "components" && "Components Replacement"}
+                            {activeTab === "advanced" && "Advanced Documentation"}
+                          </div>
+                          <div className="text-xs text-blue-600 font-medium">
+                            {activeTab === "basic" && "Getting started guide"}
+                            {activeTab === "components" && "Component design guide"}
+                            {activeTab === "advanced" && "Advanced topics"}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="w-8 h-8 rounded-xl bg-blue-100/80 flex items-center justify-center group-hover:bg-blue-200/80 transition-colors duration-300">
+                        <Menu className="w-4 h-4 text-blue-600" />
+                      </div>
+                    </SheetTrigger>
+                    <SheetContent side="bottom" className="h-auto max-h-[80vh] rounded-t-3xl border-t-4 border-blue-500 p-0">
+                      <div className="p-4 space-y-3">
+                        <div className="text-center mb-6">
+                          <div className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-3"></div>
+                          <h3 className="text-lg font-bold text-slate-800 mb-1">Choose Documentation Section</h3>
+                          <p className="text-slate-600 text-sm">Select the section you want to explore</p>
+                        </div>
+
+                        <div className="space-y-2">
+                          <button
+                            onClick={() => setActiveTab("basic")}
+                            className={`w-full p-4 rounded-2xl text-left transition-all duration-300 transform hover:scale-[1.02] ${activeTab === "basic"
+                              ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-xl"
+                              : "bg-slate-50 text-slate-700 hover:bg-blue-50 border-2 border-blue-100"
+                              }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${activeTab === "basic" ? "bg-white/20" : "bg-blue-100"
+                                }`}>
+                                <Book className={`w-5 h-5 ${activeTab === "basic" ? "text-white" : "text-blue-600"}`} />
+                              </div>
+                              <div className="flex-1">
+                                <div className="font-bold text-base mb-1">Basic Documentation</div>
+                                <div className={`text-sm ${activeTab === "basic" ? "opacity-90" : "opacity-70"}`}>
+                                  Getting started guide with step-by-step instructions
+                                </div>
+                              </div>
+                            </div>
+                          </button>
+
+                          <button
+                            onClick={() => setActiveTab("components")}
+                            className={`w-full p-4 rounded-2xl text-left transition-all duration-300 transform hover:scale-[1.02] ${activeTab === "components"
+                              ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-xl"
+                              : "bg-slate-50 text-slate-700 hover:bg-orange-50 border-2 border-orange-100"
+                              }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${activeTab === "components" ? "bg-white/20" : "bg-orange-100"
+                                }`}>
+                                <Replace className={`w-5 h-5 ${activeTab === "components" ? "text-white" : "text-orange-600"}`} />
+                              </div>
+                              <div className="flex-1">
+                                <div className="font-bold text-base mb-1">Components Replacement</div>
+                                <div className={`text-sm ${activeTab === "components" ? "opacity-90" : "opacity-70"}`}>
+                                  Learn how to customize and replace components
+                                </div>
+                              </div>
+                            </div>
+                          </button>
+
+                          <button
+                            onClick={() => setActiveTab("advanced")}
+                            className={`w-full p-4 rounded-2xl text-left transition-all duration-300 transform hover:scale-[1.02] ${activeTab === "advanced"
+                              ? "bg-gradient-to-r from-purple-500 to-violet-600 text-white shadow-xl"
+                              : "bg-slate-50 text-slate-700 hover:bg-purple-50 border-2 border-purple-100"
+                              }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${activeTab === "advanced" ? "bg-white/20" : "bg-purple-100"
+                                }`}>
+                                <Zap className={`w-5 h-5 ${activeTab === "advanced" ? "text-white" : "text-purple-600"}`} />
+                              </div>
+                              <div className="flex-1">
+                                <div className="font-bold text-base mb-1">Advanced Documentation</div>
+                                <div className={`text-sm ${activeTab === "advanced" ? "opacity-90" : "opacity-70"}`}>
+                                  Advanced features and customization options
+                                </div>
+                              </div>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+                </div>
+
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex justify-center mb-12 lg:mb-16">
+                  <div className="relative bg-white/90 backdrop-blur-xl border border-white/60 rounded-2xl p-2 shadow-2xl max-w-4xl">
+                    <TabsList className="relative grid w-full grid-cols-3 rounded-xl bg-transparent p-0 h-auto">
+                      <TabButton
+                        value="basic"
+                        icon={Book}
+                        title="Basic"
+                        subtitle="Documentation"
+                        gradientFrom="#3b82f6"
+                        gradientTo="#1d4ed8"
+                        activeColors={{ from: "rgba(59, 130, 246, 0.4)", to: "rgba(29, 78, 216, 0.3)" }}
+                      />
+                      <TabButton
+                        value="components"
+                        icon={Replace}
+                        title="Components"
+                        subtitle="Replacement"
+                        gradientFrom="#f97316"
+                        gradientTo="#ec4899"
+                        activeColors={{ from: "rgba(249, 115, 22, 0.4)", to: "rgba(236, 72, 153, 0.3)" }}
+                      />
+                      <TabButton
+                        value="advanced"
+                        icon={Zap}
+                        title="Advanced"
+                        subtitle="Documentation"
+                        gradientFrom="#8b5cf6"
+                        gradientTo="#7c3aed"
+                        activeColors={{ from: "rgba(139, 92, 246, 0.4)", to: "rgba(124, 58, 237, 0.3)" }}
+                      />
+                    </TabsList>
+                  </div>
+                </div>
+
+                <TabsContent value="basic" className="mt-4 md:mt-8 lg:mt-12">
+                  <BasicDocumentation />
+                </TabsContent>
+
+                <TabsContent value="components" className="mt-4 md:mt-8 lg:mt-12">
+                  <ComponentReplacement />
+                </TabsContent>
+
+                <TabsContent value="advanced" className="mt-4 md:mt-8 lg:mt-12">
+                  <AdvancedDocumentation />
+                </TabsContent>
+              </Tabs>
+            </div>
+          </div>
         </div>
-      </SidebarProvider>
-    </div>
+      </div>
+
+      <style>{`
+        /* Enhanced modern animations */
+        @keyframes modernSlide {
+          0% {
+            transform: translateX(var(--start-pos, 0)) scale(0.95);
+            opacity: 0.8;
+          }
+          50% {
+            transform: translateX(calc(var(--start-pos, 0) + var(--end-pos, 0)) / 2) scale(1.02);
+            opacity: 0.9;
+          }
+          100% {
+            transform: translateX(var(--end-pos, 0)) scale(1);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes pulseGlow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1);
+          }
+          50% {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 0 0 60px rgba(59, 130, 246, 0.2);
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-4px);
+          }
+        }
+        
+        /* Enhanced hover and interaction effects */
+        .group:hover {
+          transform: translateY(-2px) scale(1.01);
+        }
+        
+        /* Modern backdrop effects */
+        .backdrop-blur-xl {
+          backdrop-filter: blur(24px) saturate(180%);
+        }
+        
+        /* Smooth transitions for all interactive elements */
+        * {
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Enhanced glass morphism */
+        .glass-modern {
+          background: rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(20px) saturate(180%);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        /* Mobile specific optimizations */
+        @media (max-width: 768px) {
+          .min-w-0 {
+            min-width: 0;
+          }
+          
+          .truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 
