@@ -10,23 +10,26 @@ export const basicSteps: DocStep[] = [
   {
     id: "installation",
     title: "Installation & Setup",
-    description: "Get started by cloning the repository and installing dependencies with just a few commands",
+    description: "Whether you're a developer or a beginner, this setup guide will help you launch the project in under 1 minute.",
     codeExamples: [
       {
-        title: "Clone and Install",
-        description: "Clone the project and install dependencies",
-        code: `# Clone the repository
-git clone https://github.com/yourproject/template.git
+        title: "download and Install",
+        description: "Clone the project  or download and install dependencies",
+        code: `# 1- Download the project ZIP
+
+# 2- Unzip the project file.
 
 # Navigate to project directory
 cd template
 
-# Install dependencies
-npm install
+#  3- Inside the project file, open the terminal and type:
 
-# Or using yarn
+# 4-npm install
+
+# 4- Or IF using yarn
 yarn install`,
-        path: "terminal/"
+
+        path: "terminal/Main-template"
       },
       {
         title: "Start Development",
@@ -34,12 +37,15 @@ yarn install`,
         code: `# Start development server
 npm run dev
 
-# Server will start at http://localhost:3000`,
-        path: "terminal/"
+# Server will start at   ➜  Local:   http://localhost:10000/ 
+
+#Dont forget download node frist `,
+        path: "terminal/Main-template/"
+
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop"
+      "/basic/install.png"
     ],
     icon: Download,
     category: "Setup",
@@ -48,7 +54,7 @@ npm run dev
   {
     id: "customize-colors",
     title: "Customize colors",
-    description: "Learn how to customize colors and color schemes throughout your website",
+    description: " how to customize colors and color schemes throughout your website using Tailwind and CSS variables.",
     codeExamples: [
       {
         title: "Tailwind Color Configuration",
@@ -59,15 +65,20 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#eff6ff',
-          500: '#3b82f6',
-          900: '#1e3a8a',
+          DEFAULT: '#D4AF37',
+          light: '#F5EFD8',
+          dark: '#A38728'
         },
         secondary: {
-          50: '#f0fdf4',
-          500: '#22c55e',
-          900: '#14532d',
-        }
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))'
+        },
+        neutral: {
+          DEFAULT: '#222222',
+          light: '#444444',
+          dark: '#0F0F0F'
+        },
+        surface: '#FAFAF8'
       }
     }
   }
@@ -76,11 +87,11 @@ export default {
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop"
-    ],
-    icon: Palette,
+      "basic/color.png"
+    ], icon: Palette,
     category: "Design",
     path: "src/styles/"
+
   },
   {
     id: "customize-fonts",
@@ -94,7 +105,7 @@ export default {
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
 // tailwind.config.ts
@@ -102,17 +113,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'playfair': ['Playfair Display', 'serif'],
-        'inter': ['Inter', 'sans-serif'],
+        playfair: ['"Playfair Display"', 'serif'],
+        tajawal: ['"Tajawal"', 'sans-serif'],
       },
     },
   },
-}`,
-        path: "index.html"
+};`,
+        path: "index.html + tailwind.config.ts"
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop"
+      "basic/font.png"
     ],
     icon: Type,
     category: "Typography",
@@ -121,26 +132,47 @@ export default {
   {
     id: "edit-texts",
     title: "Edit texts",
-    description: "Modify and update text content throughout your website easily",
+    description: "Use simple inline logic like `isRTL` to easily support both Arabic and English — or any RTL/LTR language pair.",
     codeExamples: [
       {
-        title: "Component Text Updates",
-        description: "Update text in React components",
-        code: `// src/components/HeroSection.tsx
-const HeroSection = () => {
+        title: "Switch text by language",
+        description: "Inline conditional text lets you switch between Arabic and English — clean, fast, and easy to maintain.",
+        code: `// src/components/AboutSection.tsx
+
+// This is a simplified example — don't copy-paste directly,
+// but use it as a reference in your multilingual components.
+
+const AboutSection = ({ isRTL }: { isRTL: boolean }) => {
   return (
-    <div className="hero-section">
-      <h1>Your Custom Title Here</h1>
-      <p>Your custom description text goes here</p>
-      <button>Your Custom Button Text</button>
-    </div>
+    <section>
+      {/* Example: Show heading in the right language */}
+      <h1>{isRTL ? "أهلاً بك" : "Welcome"}</h1>
+
+      {/* Paragraph switches based on language */}
+      <p>
+        {isRTL
+          ? "نحن نقدم أفضل التصاميم الداخلية الفاخرة."
+          : "We provide the best in luxury interior design."}
+      </p>
+
+      {/* More benefits of this method below 👇 */}
+    </section>
   );
-};`,
-        path: "src/components/HeroSection.tsx"
+};
+
+/**
+ * ✅ Why this method works well:
+ * - Supports any RTL language: Arabic, Hebrew, Persian, Urdu, etc.
+ * - Keeps content in one place (easy to update)
+ * - No external translation library required
+ * - Works perfectly with any static site or React framework
+ */
+`,
+        path: "src/pages/About.tsx"
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop"
+      "basic/text.jpg"
     ],
     icon: Type,
     category: "Content",
@@ -153,32 +185,39 @@ const HeroSection = () => {
     codeExamples: [
       {
         title: "Language Configuration",
-        description: "Set default language in HTML and configure in your app",
-        code: `<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Website</title>
-</head>
-<body>
-  <div id="root"></div>
-</body>
-</html>
+        description: "Set default language ",
+        code: `<!-- LanguageContext.tsx -->
 
-// src/config/language.ts
-export const DEFAULT_LANGUAGE = 'en';
-export const LANGUAGE_CONFIG = {
+// Option 1: Always fallback to English
+
+return (savedLanguage === 'en' || savedLanguage === 'ar') ? savedLanguage : 'en';
+
+
+// Option 2: Always fallback to Arabic
+return (savedLanguage === 'en' || savedLanguage === 'ar') ? savedLanguage : 'ar';
+
+
+// Option 3: Auto-detect based on user's browser language
+// 👉 This option chooses the language automatically from the browser settings
+// Example: If user's browser is in Arabic, the site opens in Arabic
+
+// Option 4: Auto-detect based on user's location (Geo IP)
+// 👉 You can use IP detection services to set language based on country
+// Example: User from Saudi → Arabic, User from US → English
+
+// 🔎To learn how to implement Option 3 & 4, check:
+// Components Replacement > Default Language
+
+
   default: 'en',
   fallback: 'en',
-  available: ['en', 'ar', 'fr', 'es']
+  available: ['en = any ltr langaue', 'ar=a rabic,Persian Hebrew Urdu Armenian']
 };`,
-        path: "index.html"
+        path: "src/context/LanguageContext.tsx"
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop"
+      "basic/lang.png"
     ],
     icon: Globe,
     category: "Localization",
@@ -192,130 +231,52 @@ export const LANGUAGE_CONFIG = {
       {
         title: "Create New Page Component",
         description: "Create a new page component with proper structure",
-        code: `// src/pages/NewPage.tsx
-import React from 'react';
-import Header from '@/components/Header';
+        code: `// src/App.tsx
 
-const NewPage = () => {
-  return (
-    <div className="min-h-screen bg-slate-50">
-      <Header />
-      <div className="pt-28 pb-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-6">
-            New Page Title
-          </h1>
-          <p className="text-lg text-slate-600 mb-8">
-            Your page content goes here.
-          </p>
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
-            {/* Page content */}
-            <h2 className="text-2xl font-semibold mb-4">Section Title</h2>
-            <p className="text-slate-700">
-              Add your page content and components here.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import NewPage from "./pages/NewPage";   // 1
+
+...
+
+        <Route path="/new" element={<NewPage />} /> // 2
+
 
 export default NewPage;`,
-        path: "src/pages/NewPage.tsx"
+        path: "src/App.tsx"
       },
       {
-        title: "Add Route Configuration",
+        title: "Add to Navbar.tsx",
         description: "Add the new page to your application routes",
-        code: `// src/App.tsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Index from '@/pages/Index';
-import Documentation from '@/pages/Documentation';
-import NewPage from '@/pages/NewPage';
-import NotFound from '@/pages/NotFound';
+        code: `Navbar.tsx
+        
+# add to nav bar
 
-const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/documentation" element={<Documentation />} />
-        <Route path="/new-page" element={<NewPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
-  );
-};
+#  { name: isRTL ? 'صفحة جديدة' : 'New page', path: '/new' } <- the path 
 
-export default App;`,
-        path: "src/App.tsx"
+
+
+`,
+        path: "src/components/Navbar.tsx"
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop"
+      "basic/new-page.png", "basic/page.png"
+
     ],
     icon: FilePlus,
     category: "Development",
     path: "src/pages/"
   },
   {
-    id: "change-pictures",
-    title: "Change pictures",
-    description: "Replace and manage images throughout your website with ease",
-    codeExamples: [
-      {
-        title: "Static and Dynamic Images",
-        description: "Replace images in the public folder and use dynamic URLs",
-        code: `// src/components/ImageComponent.tsx
-const ImageComponent = () => {
-  return (
-    <img 
-      src="/images/hero-image.jpg" 
-      alt="Hero Image"
-      className="w-full h-64 object-cover"
-    />
-  );
-};
 
-// src/components/Gallery.tsx
-const Gallery = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0",
-    "https://images.unsplash.com/photo-1558655146-d09347e92766",
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
-  ];
-
-  return (
-    <div className="grid grid-cols-3 gap-4">
-      {images.map((src, index) => (
-        <img key={index} src={src} alt={\`Gallery \${index + 1}\`} />
-      ))}
-    </div>
-  );
-};`,
-        path: "src/components/ImageComponent.tsx"
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=600&h=400&fit=crop"
-    ],
-    icon: Image,
-    category: "Media",
-    path: "public/images/"
-  },
-  {
     id: "seo-control",
-    title: "SEO control",
-    description: "Optimize your website for search engines with proper SEO configuration",
+    title: "SEO Component",
+    description: "Create a reusable SEO component",
     codeExamples: [
       {
         title: "Meta Tags Configuration",
         description: "Set up essential meta tags for SEO",
         code: `<!-- index.html -->
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Website Title - Keywords</title>
+  <
   <meta name="description" content="Your website description for search engines">
   <meta name="keywords" content="keyword1, keyword2, keyword3">
   <meta name="author" content="Your Name">
@@ -333,12 +294,15 @@ const Gallery = () => {
   <meta property="twitter:title" content="Your Website Title">
   <meta property="twitter:description" content="Your website description">
   <meta property="twitter:image" content="https://yourwebsite.com/og-image.jpg">
-</head>`,
-        path: "index.html"
+</head>`
+
+        ,
+        path: "src/components/SEOHead.tsx"
       },
       {
-        title: "SEO Component",
-        description: "Create a reusable SEO component",
+        title: "SEO head",
+        description: "Optimize your website for search engines with proper SEO configuration",
+
         code: `// src/components/SEOHead.tsx
 import { useEffect } from 'react';
 
@@ -381,7 +345,6 @@ export default SEOHead;`,
       }
     ],
     images: [
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
       "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop"
     ],
     icon: Search,
@@ -629,258 +592,28 @@ export const componentsReplaceSteps: ComponentReplaceStep[] = [
 
 export const advancedSteps: AdvancedStep[] = [
   {
-    id: "edit-texts",
-    title: "Edit Texts",
-    description: "Learn how to edit and customize text content across your application with dynamic text management",
-    code: `// components/EditableText.tsx
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-
-interface EditableTextProps {
-  initialText: string;
-  onSave: (text: string) => void;
-}
-
-export const EditableText = ({ initialText, onSave }: EditableTextProps) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(initialText);
-
-  const handleSave = () => {
-    onSave(text);
-    setIsEditing(false);
-  };
-
-  if (isEditing) {
-    return (
-      <div className="flex gap-2 items-center">
-        <Input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="flex-1"
-        />
-        <Button size="sm" onClick={handleSave}>Save</Button>
-        <Button size="sm" variant="outline" onClick={() => setIsEditing(false)}>
-          Cancel
-        </Button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex gap-2 items-center group">
-      <span className="flex-1">{text}</span>
-      <Button
-        size="sm"
-        variant="ghost"
-        onClick={() => setIsEditing(true)}
-        className="opacity-0 group-hover:opacity-100 transition-opacity"
-      >
-        Edit
-      </Button>
-    </div>
-  );
-};`,
-    path: "src/components/EditableText.tsx",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    videoPoster: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop",
-    icon: Edit,
-    category: "Content"
-  },
-  {
-    id: "change-images",
-    title: "Change Images",
-    description: "Master image management, uploading, and dynamic image replacement in your applications",
-    code: `// components/ImageUploader.tsx
-import { useState, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Upload, X } from 'lucide-react';
-
-interface ImageUploaderProps {
-  currentImage?: string;
-  onImageChange: (file: File) => void;
-  onImageRemove: () => void;
-}
-
-export const ImageUploader = ({ 
-  currentImage, 
-  onImageChange, 
-  onImageRemove 
-}: ImageUploaderProps) => {
-  const [dragActive, setDragActive] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragActive(false);
-    
-    const files = e.dataTransfer.files;
-    if (files[0] && files[0].type.startsWith('image/')) {
-      onImageChange(files[0]);
-    }
-  };
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files[0]) {
-      onImageChange(files[0]);
-    }
-  };
-
-  return (
-    <div className="space-y-4">
-      {currentImage && (
-        <div className="relative group">
-          <img 
-            src={currentImage} 
-            alt="Current" 
-            className="w-full h-48 object-cover rounded-lg"
-          />
-          <Button
-            size="sm"
-            variant="destructive"
-            onClick={onImageRemove}
-            className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <X className="w-4 h-4" />
-          </Button>
-        </div>
-      )}
-      
-      <div
-        className={\`border-2 border-dashed rounded-lg p-8 text-center transition-colors \${
-          dragActive ? 'border-primary bg-primary/5' : 'border-gray-300'
-        }\`}
-        onDragOver={(e) => e.preventDefault()}
-        onDragEnter={() => setDragActive(true)}
-        onDragLeave={() => setDragActive(false)}
-        onDrop={handleDrop}
-      >
-        <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-        <p className="text-lg font-medium mb-2">Upload New Image</p>
-        <p className="text-gray-600 mb-4">Drag and drop or click to select</p>
-        
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleFileSelect}
-          className="hidden"
-        />
-        
-        <Button onClick={() => fileInputRef.current?.click()}>
-          Choose File
-        </Button>
-      </div>
-    </div>
-  );
-};`,
-    path: "src/components/ImageUploader.tsx",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    videoPoster: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=600&h=400&fit=crop",
-    icon: Image,
-    category: "Media"
-  },
-  {
     id: "new-project-page",
     title: "New Project Page",
     description: "Create new project pages with dynamic routing and modern page layouts",
-    code: `// pages/NewProject.tsx
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+    code: `Add New page Project
+    
+1- Add new-page to  date from 
 
-interface ProjectData {
-  name: string;
-  description: string;
-  type: 'web' | 'mobile' | 'desktop';
-  template: string;
-}
+src/pages/projectsData.ts
 
-export const NewProject = () => {
-  const navigate = useNavigate();
-  const [projectData, setProjectData] = useState<ProjectData>({
-    name: '',
-    description: '',
-    type: 'web',
-    template: 'blank'
-  });
+2- Add new-page to  image from display main page
 
-  const handleCreate = async () => {
-    try {
-      // Create project logic here
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(projectData)
-      });
-      
-      if (response.ok) {
-        const project = await response.json();
-        navigate(\`/projects/\${project.id}\`);
-      }
-    } catch (error) {
-      console.error('Failed to create project:', error);
-    }
-  };
+src/pages/Projects.tsx
 
-  return (
-    <div className="container mx-auto px-6 py-8 max-w-2xl">
-      <h1 className="text-3xl font-bold mb-8">Create New Project</h1>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle>Project Details</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium mb-2">Project Name</label>
-            <Input
-              value={projectData.name}
-              onChange={(e) => setProjectData(prev => ({ ...prev, name: e.target.value }))}
-              placeholder="Enter project name"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium mb-2">Description</label>
-            <Textarea
-              value={projectData.description}
-              onChange={(e) => setProjectData(prev => ({ ...prev, description: e.target.value }))}
-              placeholder="Describe your project"
-              rows={4}
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium mb-2">Project Type</label>
-            <select
-              value={projectData.type}
-              onChange={(e) => setProjectData(prev => ({ ...prev, type: e.target.value as any }))}
-              className="w-full p-2 border rounded-md"
-            >
-              <option value="web">Web Application</option>
-              <option value="mobile">Mobile App</option>
-              <option value="desktop">Desktop App</option>
-            </select>
-          </div>
-          
-          <div className="flex gap-4 pt-4">
-            <Button onClick={handleCreate} className="flex-1">
-              Create Project
-            </Button>
-            <Button variant="outline" onClick={() => navigate('/projects')}>
-              Cancel
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};`,
+3- Add new-page to  from nav bar dropdwon desktop 
+
+src/components/ProjectsDropdown.tsx
+
+4- Add new-page to  from drop down mobile  
+
+src/components/MobileProjectsMenu.tsx
+
+`,
     path: "src/pages/NewProject.tsx",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     videoPoster: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=400&fit=crop",
@@ -890,220 +623,45 @@ export const NewProject = () => {
   {
     id: "delete-project-page",
     title: "Delete Project Page",
-    description: "Implement safe project deletion with confirmation dialogs and data cleanup",
-    code: `// components/DeleteProjectDialog.tsx
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Input } from '@/components/ui/input';
-import { Trash2 } from 'lucide-react';
+    description: "just",
+    code: ` Just reverse the steps for creating a new project.
 
-interface DeleteProjectDialogProps {
-  projectName: string;
-  projectId: string;
-  onDelete: (projectId: string) => Promise<void>;
-}
+1- Delete date from 
+src/pages/projectsData.ts
 
-export const DeleteProjectDialog = ({ 
-  projectName, 
-  projectId, 
-  onDelete 
-}: DeleteProjectDialogProps) => {
-  const [confirmText, setConfirmText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  
-  const isConfirmValid = confirmText === projectName;
+2- Delete image from display main page
 
-  const handleDelete = async () => {
-    if (!isConfirmValid) return;
-    
-    setIsDeleting(true);
-    try {
-      await onDelete(projectId);
-    } catch (error) {
-      console.error('Failed to delete project:', error);
-    } finally {
-      setIsDeleting(false);
-    }
-  };
+src/pages/Projects.tsx
 
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="sm">
-          <Trash2 className="w-4 h-4 mr-2" />
-          Delete Project
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Delete Project</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the project
-            <strong className="text-destructive"> {projectName} </strong>
-            and all of its data.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        
-        <div className="my-4">
-          <label className="text-sm font-medium mb-2 block">
-            Type <strong>{projectName}</strong> to confirm:
-          </label>
-          <Input
-            value={confirmText}
-            onChange={(e) => setConfirmText(e.target.value)}
-            placeholder={projectName}
-          />
-        </div>
-        
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={handleDelete}
-            disabled={!isConfirmValid || isDeleting}
-            className="bg-destructive hover:bg-destructive/90"
-          >
-            {isDeleting ? 'Deleting...' : 'Delete Project'}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-};`,
-    path: "src/components/DeleteProjectDialog.tsx",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    videoPoster: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=600&h=400&fit=crop",
+3- Delete from nav bar dropdwon desktop 
+
+src/components/ProjectsDropdown.tsx
+
+4- Delete from drop down mobile  
+
+src/components/MobileProjectsMenu.tsx
+`,
+    path: "src/pages/projectsData.ts",
+    videoUrl: "",
+    videoPoster: "basic/no-page.png",
     icon: Trash2,
     category: "Management"
   },
   {
     id: "compound-project",
     title: "Compound Project",
-    description: "Build complex multi-component projects with advanced architecture patterns",
-    code: `// components/CompoundProject.tsx
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+    description: "replace complex multi-component projects with advanced architecture patterns",
+    code: `Just follow the video above.
 
-interface ProjectContextType {
-  activeModule: string;
-  setActiveModule: (module: string) => void;
-  modules: ProjectModule[];
-}
 
-interface ProjectModule {
-  id: string;
-  name: string;
-  status: 'active' | 'inactive' | 'error';
-  dependencies: string[];
-}
+You can go to the following path and choose the best layout 
+for your project page. You can simply 
+copy and paste and replace any component.
 
-const ProjectContext = createContext<ProjectContextType | null>(null);
-
-const useProject = () => {
-  const context = useContext(ProjectContext);
-  if (!context) throw new Error('useProject must be used within ProjectProvider');
-  return context;
-};
-
-interface ProjectProviderProps {
-  children: ReactNode;
-  modules: ProjectModule[];
-}
-
-const ProjectProvider = ({ children, modules }: ProjectProviderProps) => {
-  const [activeModule, setActiveModule] = useState(modules[0]?.id || '');
-
-  return (
-    <ProjectContext.Provider value={{ activeModule, setActiveModule, modules }}>
-      {children}
-    </ProjectContext.Provider>
-  );
-};
-
-const ModuleSelector = () => {
-  const { modules, activeModule, setActiveModule } = useProject();
-
-  return (
-    <div className="flex flex-wrap gap-2 mb-6">
-      {modules.map((module) => (
-        <Button
-          key={module.id}
-          variant={activeModule === module.id ? 'default' : 'outline'}
-          onClick={() => setActiveModule(module.id)}
-          className="flex items-center gap-2"
-        >
-          {module.name}
-          <Badge 
-            variant={module.status === 'active' ? 'default' : 'secondary'}
-            className="ml-2"
-          >
-            {module.status}
-          </Badge>
-        </Button>
-      ))}
-    </div>
-  );
-};
-
-const ModuleViewer = () => {
-  const { modules, activeModule } = useProject();
-  const currentModule = modules.find(m => m.id === activeModule);
-
-  if (!currentModule) return <div>Module not found</div>;
-
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{currentModule.name}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <div>
-            <h4 className="font-medium mb-2">Status</h4>
-            <Badge variant={currentModule.status === 'active' ? 'default' : 'secondary'}>
-              {currentModule.status}
-            </Badge>
-          </div>
-          
-          <div>
-            <h4 className="font-medium mb-2">Dependencies</h4>
-            <div className="flex flex-wrap gap-2">
-              {currentModule.dependencies.map((dep) => (
-                <Badge key={dep} variant="outline">{dep}</Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-export const CompoundProject = ({ modules }: { modules: ProjectModule[] }) => {
-  return (
-    <ProjectProvider modules={modules}>
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold">Compound Project Manager</h2>
-        <ModuleSelector />
-        <ModuleViewer />
-      </div>
-    </ProjectProvider>
-  );
-};`,
-    path: "src/components/CompoundProject.tsx",
+    `,
+    path: "stoke/components/10-project-pages",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+
     videoPoster: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
     icon: FolderPlus,
     category: "Architecture"

@@ -68,7 +68,7 @@ const CodeBlock = ({ codeExample, onCopy }: CodeBlockProps) => {
 
       {/* Mobile Helper Text */}
       <div className="sm:hidden bg-slate-800 px-3 py-2 border-t border-slate-700">
-        <p className="text-slate-400 text-xs text-center font-medium">اسحب يميناً ويساراً لرؤية باقي الكود</p>
+        <p className="text-slate-400 text-xs text-center font-medium">pull to see more</p>
       </div>
 
       {/* Mobile Quick Actions */}
@@ -78,7 +78,7 @@ const CodeBlock = ({ codeExample, onCopy }: CodeBlockProps) => {
         </div>
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="text-slate-400 text-xs">جاهز للنسخ</span>
+          <span className="text-slate-400 text-xs">copy</span>
         </div>
       </div>
     </div>

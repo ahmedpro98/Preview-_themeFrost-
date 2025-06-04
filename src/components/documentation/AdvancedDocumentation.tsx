@@ -3,8 +3,8 @@ import { advancedSteps } from '../../data/documentationData';
 import DocumentationSidebar from './DocumentationSidebar';
 import CodeBlock from './CodeBlock';
 import LazyVideo from '../LazyVideo';
-import { FileText, Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
+import { FileText, Menu } from 'lucide-react';
 
 const AdvancedDocumentation = () => {
   const [activeStep, setActiveStep] = useState(advancedSteps[0].id);
